@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="IPTV Server">
+  <description>PHP_CodeSniffer configuration for the IPTV server.</description>
+  <file>src</file>
+  <file>tests</file>
+  <arg name="basepath" value="."/>
+  <arg name="colors"/>
+  <arg name="extensions" value="php"/>
+  <rule ref="PSR12"/>
+</ruleset>
