@@ -90,3 +90,80 @@ redis-cli ping
 - Forzar HTTPS con `ENABLE_HTTPS_REDIRECT=true`.
 - Actualizar `JWT_SECRET` periódicamente.
 - Verificar permisos en `/var/log/iptv`, `/var/cache/iptv`, `/var/backups/iptv`.
+
+## 9) Explicación de variables críticas del `.env`
+
+A continuación se explica línea por línea qué significa cada variable crítica y cómo elegir su valor. Para editar el archivo:
+
+```bash
+cp config/.env.example .env
+nano .env
+```
+
+### APP_URL
+
+- **Qué es:** la URL base que usan los clientes (Xtream Codes) para acceder al servidor.
+- **Cómo se elige:** IP local o dominio interno + puerto.
+- **Ejemplo:**
+  ```
+  APP_URL=http://192.168.1.50:8080
+  ```
+
+### DB_DRIVER
+
+- **Qué es:** motor de base de datos a utilizar.
+- **Valores posibles:** `mysql` o `sqlite`.
+- **Ejemplo (MariaDB/MySQL):**
+  ```
+  DB_DRIVER=mysql
+  ```
+- **Ejemplo (SQLite):**
+  ```
+  DB_DRIVER=sqlite
+  ```
+
+### DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS
+
+- **Qué son:** datos de conexión a la base de datos (si usas `mysql`).
+- **Cómo se eligen:**
+  - `DB_NAME` y `DB_USER` los defines tú al crear la base de datos/usuario.
+  - `DB_PASS` es la contraseña que tú estableces para ese usuario.
+- **Ejemplo:**
+  ```
+  DB_HOST=localhost
+  DB_PORT=3306
+  DB_NAME=iptv
+  DB_USER=iptv
+  DB_PASS=mi_clave_super_segura
+  ```
+
+### JWT_SECRET
+
+- **Qué es:** clave secreta para firmar los tokens JWT.
+- **Cómo se elige:** una cadena larga y aleatoria (mínimo 32 caracteres).
+- **Ejemplo:**
+  ```
+  JWT_SECRET=V9Nn2kQqH0Wm1X2zLr98sK0PzLx7kQmP
+  ```
+
+### CACHE_DRIVER
+
+- **Qué es:** sistema de caché.
+- **Valores posibles:** `redis` o `file`.
+- **Ejemplo (Redis):**
+  ```
+  CACHE_DRIVER=redis
+  ```
+- **Ejemplo (archivos):**
+  ```
+  CACHE_DRIVER=file
+  ```
+
+### LOG_PATH
+
+- **Qué es:** ruta del archivo de logs.
+- **Cómo se elige:** debe ser escribible por el usuario del servicio.
+- **Ejemplo:**
+  ```
+  LOG_PATH=/var/log/iptv/app.log
+  ```
