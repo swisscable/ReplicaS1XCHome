@@ -20,6 +20,7 @@ final class ContainerFactory
     public function build(array $env): \Psr\Container\ContainerInterface
     {
         $builder = new ContainerBuilder();
+        $builder->useAutowiring(true);
         $builder->addDefinitions([
             Config::class => fn () => new Config($env),
             PDO::class => function (Config $config): PDO {
