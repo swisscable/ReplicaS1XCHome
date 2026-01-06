@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: IPTV Server API
+  version: 1.0.0
+  description: Xtream Codes-compatible API endpoints for IPTV clients.
+servers:
+  - url: http://localhost:8080
+paths:
+  /player_api.php:
+    get:
+      summary: Xtream Codes API entry point
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: action
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Auth payload or list output
+  /get.php:
+    get:
+      summary: Playlist generation
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: output
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: M3U playlist
+  /xmltv.php:
+    get:
+      summary: EPG output
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: XMLTV document
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+  /metrics:
+    get:
+      summary: Prometheus metrics
+      responses:
+        "200":
+          description: Metrics
